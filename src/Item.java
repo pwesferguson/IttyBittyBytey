@@ -1,8 +1,13 @@
-/*
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
 public class Item {
-*/
-/*
-    public Item {
+    Statement statement;
+    ResultSet resultSet;
+    Connection connection;
+
+    public Item() {
 
     }
 
@@ -35,14 +40,15 @@ public class Item {
      * @param String
      * @return true if the item is available
      *
-     *//*
+     */
 
-    public boolean ItemAvailable() {
-        //TODO:
+    public static boolean ItemAvailable() {
+        // make the query
+
         return false;
     }
 
-    */
+
 /**
      * Sorts items based on user rating
      *
@@ -61,13 +67,13 @@ public class Item {
      * @param titleOrID
      * @return int
      *
-     *//*
-
+     */
+/*
     public int countItems(String titleOrID) {
         //TODO:
         return -1;
-    }
+    }*/
 
 
 }
-*/
+
