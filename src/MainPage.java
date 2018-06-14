@@ -1,6 +1,12 @@
-import javax.swing.*;
 
-public class MainPage {
+
+import javax.swing.*;
+import javax.swing.table.TableColumn;
+import java.awt.event.*;
+import java.sql.Connection;
+
+
+public class MainPage implements ActionListener {
     private JRadioButton memberRadioButton;
     private JRadioButton employeeRadioButton;
     private JTextField textField1;
@@ -34,14 +40,64 @@ public class MainPage {
     private JTextField textField8;
     private JButton payBalaceButton;
     private JTextField textField9;
-    private JPanel MainPage;
+    private JPanel MainPagePanel;
+    private JTable table1;
+    private JScrollPane resultsTableScroll;
+    public JFrame mainFrame;
+
 
     public static void main(String[] args) {
-        //This code loads up the UI. Please don't change it unless you're sure!
-        JFrame frame = new JFrame("MainPage");
-        frame.setContentPane(new MainPage().MainPage);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setVisible(true);
+        MainPage mainPage = new MainPage();
     }
+
+    public MainPage() {
+        System.out.println("MainPage Constructor");
+        //This code loads up the UI. Please don't change it unless you're sure!
+        mainFrame = new JFrame("MainPagePanel");
+        mainFrame.setContentPane(MainPagePanel);
+        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        mainFrame.pack();
+        mainFrame.setVisible(true);
+
+        initializeButtons();
+    }
+
+
+    public void actionPerformed(ActionEvent e) {
+        System.out.println("Default action event handler called. This is a problem!");
+        //System.exit(0);
+    }
+
+    public void initializeButtons() {
+        System.out.println("Init Buttons");
+        checkAvailabilityOfTitleButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("checkAvailabilityButtonPressed");
+
+                //make the query to the data base
+                //save the result
+                boolean result = Item.ItemAvailable();
+
+                //create the table with the correct number of rows & columns
+                String data[][]={ {"101","Amit","670000"},
+                        {"102","Jai","780000"},
+                        {"101","Sachin","ooo"}};
+                String column[]={"ID","NAME","SALARY"};
+                    loadDisplayTable(data, column);
+
+            }
+        });
+
+    }
+
+    public void loadDisplayTable(String [][] data, String [] column) {
+
+
+        table1 = new JTable(data,column);
+        resultsTableScroll.getViewport().add(table1);
+        mainFrame.add(resultsTableScroll);
+
+    }
+
 }
